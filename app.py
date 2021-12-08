@@ -18,8 +18,10 @@ def predict_label(img_path):
     q.append(query)
     q = np.array(q, dtype='float') / 255.0
     q_pred = model.predict(q)
-    temp = np.round(q_pred, 1)
-    predicted_bit = int(temp)
+    if q_pred <= 0.5:
+        predicted_bit = 0
+    else:
+        predicted_bit = 1
     print(predicted_bit)
     return class_dict[predicted_bit]
 
